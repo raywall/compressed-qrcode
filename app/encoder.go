@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"compress/gzip"
+	"encoding/base64"
 	"fmt"
 	"os"
 	"strings"
@@ -34,8 +35,11 @@ func EncodeToQRCode(inputTxtPath, outputQRPath string) error {
 		return fmt.Errorf("erro ao fechar compressor: %w", err)
 	}
 
+	// Codifica em base64 para que os bytes binarios sejam representaveis como texto no QR Code
+	encoded := base64.StdEncoding.EncodeToString(compressed.Bytes())
+
 	// Geração do QR Code (nível de correção Low para maximizar capacidade)
-	if err := qrcode.WriteFile(compressed.String(), qrcode.Low, 512, outputQRPath); err != nil {
+	if err := qrcode.WriteFile(encoded, qrcode.Low, 512, outputQRPath); err != nil {
 		return fmt.Errorf("erro ao gerar QR Code: %w", err)
 	}
 	return nil
