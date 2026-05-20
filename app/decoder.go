@@ -9,8 +9,7 @@ import (
 	"strings"
 
 	"github.com/makiuchi-d/gozxing"
-	"github.com/makiuchi-d/gozxing/qrcode"
-	"github.com/skip2/go-qrcode"
+	gozxingqr "github.com/makiuchi-d/gozxing/qrcode"
 )
 
 // DecodeFromQRCode lê uma imagem PNG contendo um QR Code, decodifica os bytes
@@ -31,7 +30,7 @@ func DecodeFromQRCode(qrImagePath, outputTxtPath string) error {
 	if err != nil {
 		return fmt.Errorf("erro ao criar bitmap: %w", err)
 	}
-	qrReader := qrcode.NewQRCodeReader()
+	qrReader := gozxingqr.NewQRCodeReader()
 	result, err := qrReader.Decode(bmp, nil)
 	if err != nil {
 		return fmt.Errorf("erro ao ler QR Code: %w", err)

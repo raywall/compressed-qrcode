@@ -7,8 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/makiuchi-d/gozxing/qrcode"
-	"github.com/skip2/go-qrcode"
+	qrcode "github.com/skip2/go-qrcode"
 )
 
 // EncodeToQRCode lê um arquivo texto, minifica (quebras de linha → ';'),
